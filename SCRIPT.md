@@ -17,11 +17,11 @@ Crash Test is a red-team harness for tool-using agents. It throws eight attacks 
 
 [1:00  Sponsor stack cards.]
 
-Here is how it runs. Every attack gets its own disposable Daytona sandbox, spun up in well under a second, with a canary secret planted inside, so a leak is caught deterministically and the blast radius is zero. The browse tool is pluggable, with an Anchor Browser adapter so real sites never touch a host; today's pages are stubs, since the attack rides in the page text either way. Company memory is SurrealDB Agent Memory, where every fact carries a scope, trusted or untrusted. Every scenario becomes an Arize AX span with an attack-success eval attached. The model is Claude on Amazon Bedrock.
+Here is how it runs. Every attack gets its own disposable Daytona sandbox, spun up in under a second, with a canary secret planted inside, so any leak is caught deterministically. The browse tool is pluggable, with an Anchor Browser adapter; today's pages are stubs, since the attack rides in the page text. Company memory is SurrealDB Agent Memory, where every fact carries a scope, trusted or untrusted. Every scenario becomes an Arize AX span with an attack-success eval attached. The model is Claude on Amazon Bedrock.
 
 [1:25  Run tab. Click Launch crash test. Let the round-one cards flip.]
 
-Let's launch. Round one runs with a single baseline rule: be helpful, accurate, and safe. Every card you see is a real Daytona sandbox being created, attacked, scored, and destroyed, each one a span in Arize. [pause two seconds] Watch the board. Against Claude Sonnet on Bedrock, almost everything holds, even undefended. That is the finding, and now it is proof with traces. In our runs so far, the only thing that landed was a destructive command hidden inside a cleanup guide.
+Let's launch. Round one runs with a single baseline rule: be helpful, accurate, and safe. Every card is a real Daytona sandbox: created, attacked, scored, destroyed, and traced in Arize. [pause two seconds] Watch the board. Against Claude Sonnet on Bedrock, almost everything holds, even undefended. That is the finding, and now it is proof with traces. In our runs so far, the only thing that landed was a destructive command hidden inside a cleanup guide.
 
 [1:55  Memory strip streams, then the recall panel fills.]
 
@@ -33,7 +33,7 @@ Round two. Same eight attacks, same model, no retraining. [pause two seconds] Th
 
 [2:30  Memory tab.]
 
-Here is that memory. The poisoned policy sits in the untrusted scope, which is exactly why the hardened agent refused to act on it. Provenance is the defense.
+Here is that memory. The poisoned policy sits in the untrusted scope, which is why the agent refused it. Provenance is the defense.
 
 [2:40  Safeguards tab.]
 
