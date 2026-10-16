@@ -1,0 +1,11 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+run.log
+progress.jsonl
+memory_local.json
+media/*.aiff
+.DS_Store
+*.log
+.claude/
