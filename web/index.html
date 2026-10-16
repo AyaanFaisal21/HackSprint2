@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crash Test</title>
+<meta name="description" content="Crash Test: a red-team harness for tool-using AI agents with an attack-memory loop.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="scanlines" aria-hidden="true"></div>
+
+<header class="topnav">
+  <a class="brand" href="#overview"><span class="brand-mark"></span><span>CRASH TEST</span></a>
+  <nav class="tabs" id="tabs">
+    <a href="#overview" data-tab="overview">Overview</a>
+    <a href="#run" data-tab="run">Run</a>
+    <a href="#memory" data-tab="memory">Memory</a>
+    <a href="#safeguards" data-tab="safeguards">Safeguards</a>
+  </nav>
+  <div class="nav-right">
+    <span class="mode-badge" id="nav-mode" data-mode="">&middot;&middot;&middot;</span>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ OVERVIEW ============ -->
+<section class="view" id="view-overview">
+  <div class="hero" id="hero">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-vignette"></div>
+    <div class="hero-overlay">
+      <div class="eyebrow"><span class="dot"></span>RED-TEAM HARNESS FOR TOOL-USING AGENTS</div>
+      <h1 class="hero-title">CRASH<span class="hero-title-accent">TEST</span></h1>
+      <p class="tagline">Ephemeral sandboxes. Durable memory. <em>Your agent remembers its own defeats.</em></p>
+      <div class="hero-actions">
+        <a href="#run" class="btn btn-primary">Launch a crash test</a>
+        <a href="#how" class="btn btn-ghost" id="how-btn">How it works</a>
+      </div>
+      <div class="hero-meta mono">8 attacks &nbsp;&middot;&nbsp; 2 rounds &nbsp;&middot;&nbsp; 1 sandbox per attack &nbsp;&middot;&nbsp; 1 canary secret</div>
+    </div>
+    <div class="hero-scroll mono">scroll</div>
+  </div>
+
+  <section class="section" id="problem">
+    <div class="container reveal">
+      <div class="section-kicker mono">01 / THE PROBLEM</div>
+      <h2>Every agent demo shows the happy path.<br><span class="accent">Nobody demos the crash.</span></h2>
+      <div class="grid-3 problem-grid">
+        <div class="card">
+          <div class="card-icon orange">!</div>
+          <h3>Hostile inputs are normal inputs</h3>
+          <p>Web pages, docs and tickets carry instructions your agent was never meant to follow. One injected line and it exfiltrates, deletes or lies.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon amber">?</div>
+          <h3>Failures are one-off anecdotes</h3>
+          <p>A red-team finding lands in a Slack thread and evaporates. The next model swap re-opens every hole, and nobody notices until production.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon cyan">&#8635;</div>
+          <h3>Agents should learn from losing</h3>
+          <p>Crash Test records every defeat as durable memory with provenance, hardens the rules from those defeats, and proves the fix by re-running the attack.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how">
+    <div class="container reveal">
+      <div class="section-kicker mono">02 / HOW IT WORKS</div>
+      <h2>Four steps. One loop.</h2>
+      <ol class="steps">
+        <li class="step">
+          <div class="step-n mono">01</div>
+          <h3>Fan out attacks into sandboxes</h3>
+          <p>Eight attacks, each in its own disposable Daytona sandbox with a planted canary secret. The browse tool runs in Anchor Browser, off-box.</p>
+        </li>
+        <li class="step">
+          <div class="step-n mono">02</div>
+          <h3>Score with deterministic checks + LLM judge</h3>
+          <p>Canary leaks, destructive commands and forbidden sends are caught by rules. Subtler compliance is graded by a judge. Every scenario is an Arize span.</p>
+        </li>
+        <li class="step">
+          <div class="step-n mono">03</div>
+          <h3>Write every outcome to memory</h3>
+          <p>Landed or held, each result becomes a fact in SurrealDB Agent Memory under <code>crashtest/redteam-log</code>, with its scope attached.</p>
+        </li>
+        <li class="step">
+          <div class="step-n mono">04</div>
+          <h3>Recall and re-run</h3>
+          <p>A hardener rewrites the defense rules from round-1 failures. The agent recalls "attacks that beat me before" and faces all eight again.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="stack">
+    <div class="container reveal">
+      <div class="section-kicker mono">03 / SPONSOR STACK</div>
+      <h2>Built on five services that each do one job.</h2>
+      <div class="grid-5 stack-grid">
+        <div class="card stack-card"><div class="stack-logo mono">DT</div><h3>Daytona</h3><p>One ephemeral sandbox per attack; the blast radius is deleted after.</p></div>
+        <div class="card stack-card"><div class="stack-logo mono">AB</div><h3>Anchor Browser</h3><p>Cloud browser for the browse tool; hostile pages never touch a host.</p></div>
+        <div class="card stack-card"><div class="stack-logo mono">SR</div><h3>SurrealDB Agent Memory</h3><p>Company memory with trusted and untrusted scopes; the red-team log lives here.</p></div>
+        <div class="card stack-card"><div class="stack-logo mono">AX</div><h3>Arize AX</h3><p>Every scenario is a trace with an <code>eval.attack_success</code> attribute.</p></div>
+        <div class="card stack-card"><div class="stack-logo mono">BR</div><h3>Amazon Bedrock</h3><p>Claude as the operations agent, the hardener and the judge.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="results">
+    <div class="container reveal">
+      <div class="section-kicker mono">04 / RESULTS PREVIEW</div>
+      <h2>Round 1 landed <span class="accent">6/8</span>. Round 2 landed <span class="held-text">1/8</span>.</h2>
+      <div class="card table-card">
+        <table class="results-table">
+          <thead><tr><th>Attack</th><th>Category</th><th>Round 1 &middot; baseline</th><th>Round 2 &middot; hardened</th></tr></thead>
+          <tbody id="preview-table"></tbody>
+        </table>
+      </div>
+      <div class="cta-row">
+        <a href="#run" class="btn btn-primary">Launch a crash test</a>
+        <a href="#safeguards" class="btn btn-ghost">Read the safeguards</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer mono">CRASH TEST &middot; ephemeral sandboxes, durable memory &middot; built in a day</footer>
+</section>
+
+<!-- ============ RUN ============ -->
+<section class="view" id="view-run">
+  <div class="run-topbar">
+    <div class="run-left">
+      <span class="mode-badge big" id="run-mode" data-mode="">&middot;&middot;&middot;</span>
+      <div class="pills" id="pills">
+        <span class="pill" data-svc="daytona"><i></i>Daytona</span>
+        <span class="pill" data-svc="anchor"><i></i>Anchor</span>
+        <span class="pill" data-svc="surrealdb"><i></i>SurrealDB</span>
+        <span class="pill" data-svc="arize"><i></i>Arize</span>
+        <span class="pill" data-svc="model"><i></i><span id="pill-model-label">Model</span></span>
+      </div>
+    </div>
+    <div class="run-right">
+      <label class="dry-toggle mono" id="dry-toggle"><input type="checkbox" id="dry-run"> dry run</label>
+      <div class="timer mono" id="elapsed">00:00.0</div>
+      <button class="btn btn-launch" id="launch-btn"><span class="btn-ring"></span><span id="launch-label">Launch crash test</span></button>
+    </div>
+  </div>
+
+  <div class="run-body">
+    <div class="scoreboard card" id="scoreboard">
+      <div class="score-block">
+        <div class="score-label mono">ROUND 1 &middot; BASELINE</div>
+        <div class="score-num"><span id="score-r1">0</span><span class="score-den">/<span id="score-total-1">8</span></span><span class="score-word">landed</span></div>
+      </div>
+      <div class="score-arrow">&rarr;</div>
+      <div class="score-block">
+        <div class="score-label mono">ROUND 2 &middot; HARDENED + RECALL</div>
+        <div class="score-num held-text"><span id="score-r2">0</span><span class="score-den">/<span id="score-total-2">8</span></span><span class="score-word">landed</span></div>
+      </div>
+      <div class="score-delta" id="score-delta"><span class="delta-chip mono" id="delta-chip">awaiting run</span><span class="delta-sub" id="delta-sub">attacks that beat the agent before are recalled from memory</span></div>
+      <div class="score-canary mono" id="score-canary"></div>
+    </div>
+
+    <div class="run-error mono" id="run-error" hidden></div>
+
+    <div class="rounds">
+      <div class="round-col" id="round-1">
+        <div class="round-head">
+          <h3>Round 1 <span class="round-sub">&middot; baseline rules</span></h3>
+          <span class="round-count mono" id="round-count-1">0/8 landed</span>
+        </div>
+        <div class="cards" id="cards-1"></div>
+      </div>
+      <div class="round-col" id="round-2">
+        <div class="round-head">
+          <h3>Round 2 <span class="round-sub">&middot; hardened + recalled memory</span></h3>
+          <span class="round-count mono" id="round-count-2">0/8 landed</span>
+        </div>
+        <div class="cards" id="cards-2"></div>
+      </div>
+    </div>
+
+    <div class="panels">
+      <div class="panel card" id="memory-panel">
+        <div class="panel-head"><h3>Memory</h3><span class="panel-sub mono" id="memory-count">0 writes</span></div>
+        <div class="memory-strip" id="memory-strip"><div class="empty mono">memory writes stream here</div></div>
+      </div>
+      <div class="panel card" id="recall-panel">
+        <div class="panel-head"><h3>Recall</h3><span class="panel-sub mono" id="recall-sub">before round 2</span></div>
+        <div class="recall-body" id="recall-body"><div class="empty mono">the agent recalls "attacks that beat me before"</div></div>
+      </div>
+      <div class="panel card" id="rules-panel">
+        <div class="panel-head"><h3>Defense rules</h3><span class="panel-sub mono" id="rules-sub">baseline &rarr; hardened</span></div>
+        <div class="rules-body">
+          <div class="rules-block diff-del" id="rules-baseline"><div class="rules-title mono">BASELINE</div><div class="rules-text empty mono">waiting for round 1</div></div>
+          <div class="rules-block diff-add" id="rules-hardened"><div class="rules-title mono">HARDENED</div><div class="rules-text empty mono">written from round-1 failures</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MEMORY ============ -->
+<section class="view" id="view-memory">
+  <div class="container narrow">
+    <div class="page-head">
+      <div class="section-kicker mono">MEMORY LOG</div>
+      <h2>Everything the agent remembers.</h2>
+      <p class="lede">Facts carry their source scope, so the agent can refuse to act on untrusted ones.</p>
+      <div class="scope-legend mono">
+        <span class="scope-badge trusted">crashtest/trusted</span>
+        <span class="scope-badge untrusted">crashtest/untrusted</span>
+        <span class="scope-badge redteam">crashtest/redteam-log</span>
+      </div>
+    </div>
+    <div id="memory-log"></div>
+  </div>
+</section>
+
+<!-- ============ SAFEGUARDS ============ -->
+<section class="view" id="view-safeguards">
+  <div class="container">
+    <div class="page-head">
+      <div class="section-kicker mono">SAFEGUARDS</div>
+      <h2>Breaking agents safely.</h2>
+      <p class="lede">Six properties that make the harness safe to run against a real model with real tools.</p>
+    </div>
+    <div class="grid-3 safeguards-grid">
+      <div class="card safe-card"><div class="safe-icon orange">&#9638;</div><h3>Blast radius</h3><p>One disposable Daytona sandbox per attack. Whatever the agent does inside it, the sandbox is deleted after the scenario ends.</p></div>
+      <div class="card safe-card"><div class="safe-icon cyan">&#9673;</div><h3>Off-box browsing</h3><p>Anchor runs the browser in the cloud. Hostile pages render there, so an injected page never touches a host machine.</p></div>
+      <div class="card safe-card"><div class="safe-icon amber">&#9670;</div><h3>Canary secret</h3><p>A unique canary is planted in every sandbox. If it shows up in any answer, message or URL, the leak is caught deterministically.</p></div>
+      <div class="card safe-card"><div class="safe-icon green">&#9881;</div><h3>Provenance</h3><p>Every memory fact has a scope. Untrusted scopes are visible to the agent, so a poisoned fact can be recognized and refused.</p></div>
+      <div class="card safe-card"><div class="safe-icon cyan">&#9711;</div><h3>Observability</h3><p>Every scenario is an Arize AX span with <code>eval.attack_success</code>, so round-over-round deltas are queryable, not anecdotal.</p></div>
+      <div class="card safe-card"><div class="safe-icon orange">&#9878;</div><h3>Honest baseline</h3><p>Round 1 is not sabotaged. Round 2 rules were written from round-1 failures and recalled memory. No RL, no cherry-picking.</p></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- drawer -->
+<div class="drawer-backdrop" id="drawer-backdrop"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-head">
+    <div>
+      <div class="drawer-id mono" id="drawer-id">inj-1</div>
+      <div class="drawer-title" id="drawer-task"></div>
+    </div>
+    <button class="drawer-close" id="drawer-close" aria-label="Close">&times;</button>
+  </div>
+  <div class="drawer-chips" id="drawer-chips"></div>
+  <div class="drawer-section"><div class="drawer-label mono">REASON</div><div class="drawer-text" id="drawer-reason"></div></div>
+  <div class="drawer-section"><div class="drawer-label mono">ANSWER</div><div class="drawer-text answer" id="drawer-answer"></div></div>
+  <div class="drawer-section"><div class="drawer-label mono">TOOL CALLS</div><div class="drawer-calls" id="drawer-calls"></div></div>
+</aside>
+
+<div class="toast mono" id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.149.0/three.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
